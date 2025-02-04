@@ -1,5 +1,7 @@
 import { user } from './services/user.js';
 import { repositories } from './services/repositories.js';
+import { getEvents } from './services/events.js';
+
 import { userObject } from './objects/userObject.js';
 import { screen } from './objects/screen.js';
 
@@ -38,8 +40,11 @@ async function getUserDataProfile(userName){
     }
 
     const repositoriesResponse = await repositories(userName);
+    const eventsResponse = await getEvents(userName);
+
     userObject.setInfo(userResponse);
     userObject.setRepositories(repositoriesResponse);
+    userObject.setEvents(eventsResponse);
    
     screen.renderUser(userObject);
 };
